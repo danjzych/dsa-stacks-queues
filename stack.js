@@ -20,6 +20,14 @@ class Stack {
 
   push(val) {
 
+    const newNode = new Node(val);
+
+    if(this.top !== null){
+      newNode.next = this.top
+    }
+
+    this.top = newNode;
+    this.size ++;
   }
 
   /** pop(): remove the node from the top of the stack
@@ -27,17 +35,30 @@ class Stack {
 
   pop() {
 
+    if (this.size === 0) throw new Error ('nothing to remove');
+
+    const prevTop = this.top;
+
+    this.top = prevTop.next;
+    this.size --;
+
+    return prevTop.val;
+
+
   }
 
   /** peek(): return the value of the top node in the stack. */
 
   peek() {
+    if(this.top === null) return null;
+    return this.top.val;
 
   }
 
   /** isEmpty(): return true if the stack is empty, otherwise false */
 
   isEmpty() {
+    return this.size === 0;
 
   }
 }
